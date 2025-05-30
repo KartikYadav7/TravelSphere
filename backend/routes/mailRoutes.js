@@ -1,6 +1,6 @@
 // controllers/offerController.js
 import express from 'express';
-import User from '../models/user.js';
+import User from '../models/User.js';
 import Subscription from '../models/subscription.js';
 const router = express.Router();
 import transporter from "../middlewares/mailMiddleware.js";
