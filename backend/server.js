@@ -13,24 +13,23 @@ const port = process.env.port
 const app = express()
 connectDB();
 app.use(cors({
-    origin:["http://localhost:5173","https://travel-sphere-hazel.vercel.app"],
-    method:["get","post","put","delete"],
-    credentials:true,
-}
+  origin: ["http://localhost:5173", "https://travel-sphere-hazel.vercel.app"],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
 
 ))
 
 app.use(express.json())
-app.use('/',(req,res)=>{
-    res.send("Welcome to the server")
-})
 app.use('/',authRoutes);
 app.use('/api',dataRoutes);
 
 app.use('/api', paymentRoutes);
 app.use('/api',mailRoutes);
 app.use('/admin', adminRoutes);
-
+app.use('/',(req,res)=>{
+    res.send("Welcome to the server")
+})
 app.listen(port,()=>{
     console.log(`server is running on port:${port}`)
 })
