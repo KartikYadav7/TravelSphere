@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Nav } from '../Navbar';
 import axios from 'axios';
 import { useAuth } from '../../../context/AuthContext';
-import ChatBot  from './chatbot';
+import ChatBot  from './ChatBot';
 
 export default function HelpPage() {
   
