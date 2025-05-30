@@ -21,6 +21,9 @@ app.use(cors({
 ))
 
 app.use(express.json())
+app.use('/',(req,res)=>{
+    res.send("Welcome to the server")
+})
 app.use('/',authRoutes);
 app.use('/api',dataRoutes);
 
