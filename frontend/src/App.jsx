@@ -7,7 +7,7 @@ import About from "./Components/AboutComponents/About";
 import Package from "./Components/PackageComponent/Package";
 import HelpPage from "./Components/Help/HelpPage";
 import ChatBot from "./Components/Help/ChatBot";
-import Login from "./Pages/login";
+import Login from "./Pages/Login";
 import SignUp from "./Pages/Signup";
 import ResetPasswordModal from "./Pages/ResetPasswordModal";
 import ResetPassword from "./Pages/ResetPassword";
