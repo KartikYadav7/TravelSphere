@@ -13,7 +13,7 @@ const port = process.env.port
 const app = express()
 connectDB();
 app.use(cors({
-    origin:"http://localhost:5173",
+    origin:["http://localhost:5173","https://travel-sphere-hazel.vercel.app"],
     method:["get","post","put","delete"],
     credentials:true,
 }
