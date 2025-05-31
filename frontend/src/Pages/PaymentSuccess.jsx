@@ -25,7 +25,7 @@ const PaymentSuccess = () => {
     if (sessionId) confirmPayment();
   }, [sessionId]);
 
-  return  return (
+    return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-6">
       <div className="bg-white rounded-xl shadow-lg p-10 max-w-md w-full text-center">
         <div
