@@ -9,7 +9,7 @@ import paymentRoutes from './routes/paymentRoutes.js'
 import adminRoutes from './routes/adminRoutes.js'
 import mailRoutes from './routes/mailRoutes.js'
 
-const port = process.env.port
+const port = process.env.PORT || 5000
 const app = express()
 connectDB();
 app.use(cors({
@@ -18,7 +18,6 @@ app.use(cors({
   credentials: true
 }));
 
-))
 
 app.use(express.json())
 app.use('/',authRoutes);
@@ -27,7 +26,7 @@ app.use('/api',dataRoutes);
 app.use('/api', paymentRoutes);
 app.use('/api',mailRoutes);
 app.use('/admin', adminRoutes);
-app.use('/',(req,res)=>{
+app.get('/',(req,res)=>{
     res.send("Welcome to the server")
 })
 app.listen(port,()=>{
