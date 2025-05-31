@@ -25,7 +25,29 @@ const PaymentSuccess = () => {
     if (sessionId) confirmPayment();
   }, [sessionId]);
 
-  return <h2>✅ Thank you! Your booking was successful.</h2>;
+  return  return (
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-6">
+      <div className="bg-white rounded-xl shadow-lg p-10 max-w-md w-full text-center">
+        <div
+          className="text-6xl text-green-500 mb-4 select-none"
+          aria-label="Success checkmark"
+        >
+          ✓
+        </div>
+        <h1 className="text-2xl font-semibold text-gray-900 mb-2">
+          Payment Successful!
+        </h1>
+        <p className="text-gray-600 mb-8">
+          Thank you for your booking. We’ve received your payment and confirmed your reservation.
+        </p>
+        <a href="/"
+          className="bg-green-500 hover:bg-green-600 text-white font-medium py-3 px-8 rounded-md transition-colors duration-300"
+        >
+          Back to Home
+        </a>
+      </div>
+    </div>
+  );
 };
 
 export default PaymentSuccess;
