@@ -67,7 +67,6 @@ const BookingForm = ({ userId, tourPackageId }) => {
         note: formData.note,
       };
      
-// console.log('Booking payload:', payload);
       const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/create-checkout-session`, 
           bookingPayload,{headers:{Authorization:`${user.token}`}});
 

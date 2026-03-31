@@ -77,9 +77,6 @@ router.post('/create-checkout-session',verifyToken('user'), express.json(), asyn
   }
 });
 
-
-
-
 router.post('/confirm-payment',verifyToken('user') , express.json(), async (req, res) => {
   const { sessionId } = req.body;
 

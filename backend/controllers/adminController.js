@@ -91,7 +91,6 @@ export const updatePackage = async (req, res) => {
   }
 };
 
-
 // Delete a tour
 export const deletePackage = async (req, res) => {
   try {
@@ -107,7 +106,7 @@ export const deletePackage = async (req, res) => {
 export const getAllBookings = async (req, res) => {
   try {
    
-    const bookings = await Booking.find() .populate('tourPackage', 'title location price') // show basic package info
+    const bookings = await Booking.find() .populate('tourPackage', 'title location price') 
       .populate('user', 'userName email')
       .populate('contactInfo', 'name email phone')
       .sort({ createdAt: -1 }); // sort by most recent bookings first
