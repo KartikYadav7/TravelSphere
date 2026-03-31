@@ -6,6 +6,7 @@ import authRoutes from './routes/authRoutes.js'
 import connectDB from './config/connectDB.js'
 import dataRoutes from './routes/dataRoutes.js'
 import paymentRoutes from './routes/paymentRoutes.js'
+import tripRoutes from './routes/tripRoutes.js'
 import adminRoutes from './routes/adminRoutes.js'
 import mailRoutes from './routes/mailRoutes.js'
 
@@ -26,6 +27,7 @@ app.use('/api',dataRoutes);
 app.use('/api', paymentRoutes);
 app.use('/api',mailRoutes);
 app.use('/admin', adminRoutes);
+app.use('/api',tripRoutes);
 app.get('/',(req,res)=>{
     res.send("Welcome to the server")
 })

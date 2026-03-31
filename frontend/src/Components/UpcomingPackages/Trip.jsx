@@ -56,7 +56,15 @@ import Button from "../Button";
     }
 ]
 
- const AI_PROMPT = 'Generate Travel Plan for Location : {location}, for {totalDays} Days for {traveler} with a {budget} budget ,Give me a Hotels options list with Hotel Name, Hotel address, Price, hotel image url, geo coordinates, rating, descriptions and suggest itinerary with place Name, Place Details, Place Image Url, Geo Coordinates, ticket Pricing, rating, Time travel each of the location for {totalDays} days with each day plan with best time to visit in JSON format'
+ const AI_PROMPT = `
+Generate a travel plan for {location} for {totalDays} days for {traveler} with a {budget} budget.
+
+Return ONLY valid JSON with:
+- hotel_options (name, address, price, image_url, geo_coordinates, rating, description)
+- itinerary (day-wise plan with time, place, details, image_url, geo_coordinates, ticket_pricing, rating)
+
+No markdown. No backticks. No explanation.
+`;
 
 function Trip() {
     const [tripData, setTripData] = useState(null);
@@ -80,50 +88,45 @@ function Trip() {
     console.log(formData);
   }, [formData]);
 
-  const onGenerateTrip = async () => {
-    const user = localStorage.getItem("user");
-    if (!user) {
-    //   setOpenDialog(true);
-      return;
+const onGenerateTrip = async () => {
+  const user = localStorage.getItem("user");
+  if (!user) {
+    alert("Login")
+    return};
+
+  if (
+    !formData?.location ||
+    !formData?.noOfDays ||
+    !formData?.budget ||
+    !formData?.traveler
+  ) {
+    console.error("Please fill all details");
+    return;
+  }
+
+  setLoading(true);
+
+  const FINAL_PROMPT = AI_PROMPT
+    .replace("{location}", formData.location.label)
+    .replace(/{totalDays}/g, formData.noOfDays)
+    .replace("{traveler}", formData.traveler)
+    .replace("{budget}", formData.budget);
+
+  try {
+    const data = await chatSession(FINAL_PROMPT);
+
+    if (data) {
+      setTripData(data);
+    } else {
+      console.error("No data received");
     }
 
-    if (
-      (formData?.noOfDAys > 5 && !formData?.location) ||
-      !formData?.budget ||
-      !formData.traveler
-    ) {
-      // toast("Please fill all the details");
-      return;
-    }
-
-    setLoading(true);
-
-    const FINAL_PROMPT = AI_PROMPT.replace(
-      "{location}",
-      formData?.location?.label
-    )
-      .replace("{totalDays}", formData?.noOfDays)
-      .replace("{traveler}", formData?.traveler)
-      .replace("{budget}", formData?.budget)
-      .replace("{budget}", formData?.budget)
-      .replace("{totalDays}", formData?.noOfDays);
-
-    // console.log(FINAL_PROMPT)
-
-    const result = await chatSession.sendMessage(FINAL_PROMPT);
-    const text = await result.response.text();
-    try {
-        const jsonText = text.replace(/```json|```/g, "").trim();
-        const parsedData = JSON.parse(jsonText);
-        console.log("Parsed AI Response:", parsedData);
-        setTripData(parsedData);
-      } catch (error) {
-        console.error("Failed to parse AI response:", error);
-      }
-      setLoading(false);
-     
-  };
-
+  } catch (error) {
+    console.error("❌ Error:", error);
+  } finally {
+    setLoading(false);
+  }
+};
 
 
   return (
